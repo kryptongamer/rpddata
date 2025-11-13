@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPD Data - Gestión de Productos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 60px;
+        }
+
+        section h2 {
+            color: #667eea;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        /* Icons */
+        .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        /* Privacy Policy */
+        .privacy-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .privacy-section h3 {
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .privacy-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .privacy-section li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .download-section h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                text-align: center;
+                border-bottom: 1px solid #555;
+            }
+
+            section h2 {
+                font-size: 24px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #667eea;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>📦 RPD Data</h1>
+        <p>Solución de Gestión de Productos con Escaneo de Códigos de Barras</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#características">Características</a></li>
+            <li><a href="#privacidad">Política de Privacidad</a></li>
+            <li><a href="#descarga">Descarga</a></li>
+            <li><a href="#soporte">Soporte</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>Acerca de RPD Data</h2>
+            <p>
+                RPD Data es una aplicación empresarial diseñada para facilitar la gestión de productos en tu empresa. 
+                Con funcionalidades de escaneo de códigos de barras, gestión de categorías, búsqueda en tiempo real y 
+                almacenamiento seguro en Firebase, es la solución perfecta para optimizar tus procesos de inventario.
+            </p>
+            <p style="margin-top: 15px;">
+                <strong>Versión actual:</strong> 1.0.2 | 
+                <strong>Estado:</strong> Prueba privada en Google Play Store
+            </p>
+        </section>
+
+        <!-- Features Section -->
+        <section id="características">
+            <h2>Características Principales</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Escaneo de Códigos</h3>
+                    <p>Escanea códigos de barras directamente desde tu dispositivo Android para buscar o registrar productos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📸</div>
+                    <h3>Captura de Fotos</h3>
+                    <p>Toma fotos de productos con la cámara de tu dispositivo y guárdalas junto con la información del producto.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔍</div>
+                    <h3>Búsqueda en Tiempo Real</h3>
+                    <p>Busca productos por nombre, referencia o código de barras con resultados instantáneos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🏷️</div>
+                    <h3>Categorización</h3>
+                    <p>Organiza tus productos en categorías personalizadas y filtra por marca o tipo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">💰</div>
+                    <h3>Gestión de Precios</h3>
+                    <p>Controla precios base, recomendados y de venta con cálculos automáticos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">☁️</div>
+                    <h3>Almacenamiento en la Nube</h3>
+                    <p>Todos tus datos se sincronizan automáticamente con Firebase Firestore de forma segura.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Section -->
+        <section id="privacidad">
+            <h2>Política de Privacidad</h2>
+            
+            <div class="privacy-section">
+                <h3>📋 Resumen Ejecutivo</h3>
+                <p>
+                    RPD Data es una aplicación empresarial privada que respeta y protege tu privacidad. 
+                    Solo recopilamos datos directamente relacionados con la gestión de productos.
+                </p>
+            </div>
+
+            <div class="privacy-section">
+                <h3>📷 Permiso de Cámara</h3>
+                <p>
+                    <strong>¿Por qué lo necesitamos?</strong> Para permitirte capturar fotos de productos durante el registro.
+                </p>
+                <p>
+                    <strong>¿Cómo se usa?</strong> Las imágenes se convierten a Base64 y se almacenan en tu base de datos privada de Firebase.
+                </p>
+                <p>
+                    <strong>¿Se comparte?</strong> No. Solo usuarios autorizados de tu empresa pueden acceder.
+                </p>
+            </div>
+
+            <div class="privacy-section">
+                <h3>📊 Datos que Recopilamos</h3>
+                <ul>
+                    <li>Códigos de barras de productos</li>
+                    <li>Referencias y nombres de productos</li>
+                    <li>Información de precios (base, recomendado, venta)</li>
+                    <li>Categorías y clasificaciones</li>
+                    <li>Imágenes de productos (codificadas en Base64)</li>
+                    <li>Fechas de creación y modificación</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h3>🔒 Seguridad</h3>
+                <ul>
+                    <li>Datos encriptados en tránsito (HTTPS)</li>
+                    <li>Almacenamiento seguro en Google Cloud</li>
+                    <li>Acceso restringido a usuarios autorizados</li>
+                    <li>Sin publicidades ni seguimiento externo</li>
+                    <li>Sin integración con servicios analíticos de terceros</li>
+                </ul>
+            </div>
+
+            <div class="privacy-section">
+                <h3>📍 Permisos Utilizados</h3>
+                <table>
+                    <tr>
+                        <th>Permiso</th>
+                        <th>Motivo</th>
+                        <th>Datos Procesados</th>
+                    </tr>
+                    <tr>
+                        <td>android.permission.CAMERA</td>
+                        <td>Captura de fotos de productos</td>
+                        <td>Imágenes (almacenadas localmente)</td>
+                    </tr>
+                    <tr>
+                        <td>android.permission.INTERNET</td>
+                        <td>Conexión con Firebase</td>
+                        <td>Datos de productos, configuración</td>
+                    </tr>
+                    <tr>
+                        <td>android.permission.ACCESS_NETWORK_STATE</td>
+                        <td>Verificar conectividad</td>
+                        <td>Estado de conexión</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="privacy-section">
+                <h3>🗑️ Retención y Eliminación</h3>
+                <p>
+                    Los datos se almacenan mientras tu empresa mantenga la base de datos activa. Puedes:
+                </p>
+                <ul>
+                    <li>Eliminar productos individuales desde la aplicación</li>
+                    <li>Solicitar eliminación completa de la base de datos</li>
+                    <li>Exportar datos en cualquier momento</li>
+                </ul>
+            </div>
+
+            <div class="highlight">
+                <strong>⚠️ Importante:</strong> Esta es una aplicación empresarial privada. 
+                Solo usuarios autorizados por tu empresa pueden acceder. 
+                Contacta con tu administrador para preguntas sobre privacidad.
+            </div>
+
+            <div class="privacy-section">
+                <h3>📧 Contacto</h3>
+                <p>
+                    Para consultas sobre privacidad o datos, contacta con tu administrador de empresa o equipo de TI.
+                </p>
+                <p style="margin-top: 10px; font-size: 12px; color: #999;">
+                    Última actualización: 13 de noviembre de 2024
+                </p>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="descarga">
+            <div class="download-section">
+                <h3>📥 Descargar RPD Data</h3>
+                <p>Disponible en Google Play Store en prueba privada cerrada</p>
+                <a href="https://play.google.com/store" class="btn btn-secondary">Google Play Store</a>
+                <p style="margin-top: 20px; font-size: 14px;">
+                    Si eres usuario autorizado, busca "RPD Data" en Google Play Store.<br>
+                    Si no tienes acceso, contacta con tu administrador de empresa.
+                </p>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="soporte">
+            <h2>Soporte y Ayuda</h2>
+            <p>
+                RPD Data es una solución empresarial privada. Para soporte técnico o consultas:
+            </p>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Problemas técnicos:</strong> Contacta con tu administrador de empresa</li>
+                <li><strong>Privacidad y datos:</strong> Consulta nuestra política de privacidad arriba</li>
+                <li><strong>Reportar errores:</strong> Notifica a tu equipo de TI</li>
+                <li><strong>Sugerencias:</strong> Comparte comentarios con tu administrador</li>
+            </ul>
+
+            <h3 style="margin-top: 30px; color: #667eea;">Requisitos Técnicos</h3>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Sistema operativo:</strong> Android 7.0 o superior</li>
+                <li><strong>Memoria:</strong> Mínimo 100 MB libres</li>
+                <li><strong>Conexión:</strong> Internet estable recomendado</li>
+                <li><strong>Cámara:</strong> Dispositivo con cámara integrada</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>RPD Data</strong> © 2024 - Solución de Gestión de Productos</p>
+        <p>Versión 1.0.2 | Prueba privada cerrada en Google Play Store</p>
+        <p>
+            <a href="#privacidad" style="color: #667eea; text-decoration: none;">Política de Privacidad</a> | 
+            <a href="#soporte" style="color: #667eea; text-decoration: none;">Soporte</a>
+        </p>
+    </footer>
+</body>
+</html>

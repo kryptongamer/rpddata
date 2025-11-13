@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - RPD Data</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #1976d2;
+            border-bottom: 3px solid #1976d2;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #1976d2;
+            margin-top: 30px;
+        }
+        .last-updated {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .highlight {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Política de Privacidad - RPD Data</h1>
+    <p class="last-updated">Última actualización: 13 de noviembre de 2024</p>
+
+    <h2>1. Introducción</h2>
+    <p>
+        Esta Política de Privacidad describe cómo RPD Data ("la Aplicación") recopila, utiliza, almacena y protege tu información personal. 
+        Esta aplicación es una herramienta empresarial privada para la gestión de productos con escaneo de códigos de barras.
+    </p>
+
+    <h2>2. Información que Recopilamos</h2>
+    
+    <h3>Cámara (android.permission.CAMERA)</h3>
+    <ul>
+        <li><strong>Propósito:</strong> La aplicación solicita acceso a la cámara exclusivamente para permitirte capturar fotos de productos durante el registro en la base de datos.</li>
+        <li><strong>Datos almacenados:</strong> Las imágenes capturadas se convierten a formato Base64 y se almacenan localmente en la base de datos Firebase Firestore de tu empresa.</li>
+        <li><strong>Uso:</strong> Se utiliza únicamente para documentación de productos dentro de tu empresa y no se comparte con terceros externos.</li>
+        <li><strong>Eliminación:</strong> Puedes eliminar las imágenes en cualquier momento eliminando el producto asociado.</li>
+    </ul>
+
+    <h3>Datos de Productos</h3>
+    <ul>
+        <li>Códigos de barras</li>
+        <li>Referencias de productos</li>
+        <li>Nombres de productos</li>
+        <li>Precios (base, recomendado, venta)</li>
+        <li>Categorías de productos</li>
+        <li>Fechas de creación de registros</li>
+        <li>Imágenes de productos (en formato Base64)</li>
+    </ul>
+
+    <h2>3. Almacenamiento de Datos</h2>
+    <div class="highlight">
+        <strong>Todos los datos se almacenan en Firebase Firestore</strong>, un servicio de Google Cloud:
+        <ul>
+            <li>Los datos están encriptados en tránsito mediante HTTPS</li>
+            <li>Se aplican las políticas de seguridad automáticas de Firebase</li>
+            <li>Las imágenes se almacenan codificadas en Base64, no en servidores de almacenamiento separados</li>
+            <li>Acceso restringido solo a usuarios autorizados de tu empresa con credenciales válidas</li>
+        </ul>
+    </div>
+
+    <h2>4. Permisos Utilizados</h2>
+    <table>
+        <tr>
+            <th>Permiso</th>
+            <th>Motivo del Uso</th>
+            <th>Datos Procesados</th>
+        </tr>
+        <tr>
+            <td>android.permission.CAMERA</td>
+            <td>Captura de fotos de productos</td>
+            <td>Imágenes de productos (almacenadas localmente)</td>
+        </tr>
+        <tr>
+            <td>android.permission.INTERNET</td>
+            <td>Conexión con Firebase para sincronización de datos</td>
+            <td>Datos de productos, configuración</td>
+        </tr>
+        <tr>
+            <td>android.permission.ACCESS_NETWORK_STATE</td>
+            <td>Verificar estado de conexión a internet</td>
+            <td>Estado de conectividad</td>
+        </tr>
+    </table>
+
+    <h2>5. Seguridad de Datos</h2>
+    <ul>
+        <li>La aplicación utiliza autenticación mediante Firebase con reglas de seguridad en modo test</li>
+        <li>Los datos se almacenan en servidores seguros de Google Cloud con encriptación</li>
+        <li>Las conexiones de red utilizan protocolo HTTPS encriptado</li>
+        <li>No se comparte información con terceros sin consentimiento explícito de tu empresa</li>
+        <li>No se integran publicidades, análisis de terceros ni servicios de seguimiento</li>
+    </ul>
+
+    <h2>6. Datos Personales</h2>
+    <p>
+        Esta es una aplicación empresarial privada. Solo los usuarios autorizados por tu empresa pueden acceder a los datos. 
+        La aplicación no recopila datos personales (nombre, correo electrónico, teléfono) más allá de lo necesario para 
+        gestionar productos en la base de datos de tu empresa.
+    </p>
+
+    <h2>7. Retención de Datos</h2>
+    <p>
+        Los datos se retienen en Firestore mientras tu empresa mantenga la base de datos activa. Puedes:
+    </p>
+    <ul>
+        <li>Eliminar productos individuales dentro de la aplicación</li>
+        <li>Solicitar la eliminación completa de la base de datos a través de Google Cloud Console</li>
+        <li>Exportar datos en cualquier momento antes de la eliminación</li>
+    </ul>
+
+    <h2>8. Derechos del Usuario</h2>
+    <p>
+        Como usuario de una aplicación empresarial, tienes derecho a:
+    </p>
+    <ul>
+        <li>Acceder a tus datos en cualquier momento a través de la aplicación</li>
+        <li>Modificar o eliminar datos de productos</li>
+        <li>Solicitar información sobre cómo se almacenan tus datos</li>
+        <li>Contactar con tu administrador de empresa para consultas sobre privacidad</li>
+    </ul>
+
+    <h2>9. Cambios en la Política de Privacidad</h2>
+    <p>
+        Nos reservamos el derecho de actualizar esta política de privacidad en cualquier momento. 
+        Los cambios significativos se notificarán a los usuarios a través de:
+    </p>
+    <ul>
+        <li>Notificaciones dentro de la aplicación</li>
+        <li>Actualización de versión en Google Play Store</li>
+        <li>Comunicación directa a administradores de empresa</li>
+    </ul>
+
+    <h2>10. Contacto</h2>
+    <p>
+        Para preguntas sobre esta política de privacidad o prácticas de datos de la aplicación, 
+        contacta con tu administrador de empresa o equipo de TI.
+    </p>
+
+    <footer>
+        <p><strong>RPD Data</strong> - Solución de Gestión de Productos con Escaneo de Códigos de Barras</p>
+        <p>Versión de aplicación: 1.0.2 | Fecha de política: 13 de noviembre de 2024</p>
+    </footer>
+</body>
+</html>
